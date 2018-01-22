@@ -128,13 +128,13 @@ def scoreAll(args):
     ## LOAD AND UNZIP TRUTH FILES
     # Unzip zip files contained in the input folders
     truthDir = args.groundtruth
-    print ('This is truth directory:')
-    print (truthDir)
+    #print ('This is truth directory:')
+    #print (truthDir)
 
     truthZipSubFiles = unzipAll(truthDir, delete=True)
 
-    print('With ZIP files:')
-    print (truthZipSubFiles)
+    #print('With ZIP files:')
+    #print (truthZipSubFiles)
     truthPath = None
     if truthZipSubFiles:
         truthPath = truthZipSubFiles[0]
@@ -142,8 +142,8 @@ def scoreAll(args):
         truthSubFiles = os.listdir(truthDir)
         if truthSubFiles:
             truthPath = truthSubFiles[0]
-    print('this is truthpath')
-    print(truthPath)
+    #print('this is truthpath')
+    #print(truthPath)
     if not truthPath:
         raise ScoreException(
             'Internal error: error reading ground truth folder: %s' % truthDir)
@@ -155,7 +155,7 @@ def scoreAll(args):
     ## LOAD AND UNZIP TEST DATA
     testDir = args.submission
     testZipSubFiles = unzipAll(testDir, delete=True)
-    print ('Unzip of both truth and test files successful!')
+    #print ('Unzip of both truth and test files successful!')
     testPath = None
     if testZipSubFiles:
         testPath = testZipSubFiles[0]
@@ -163,8 +163,8 @@ def scoreAll(args):
         testSubFiles = os.listdir(testDir)
         if testSubFiles:
             testPath = testSubFiles[0]
-    print('this is testpath')
-    print(testPath)
+    #print('this is testpath')
+    #print(testPath)
     if not testPath:
         raise ScoreException(
             'Internal error: error reading ground test folder: %s' % testDir)
@@ -175,8 +175,8 @@ def scoreAll(args):
     scores = []
     for fi in range(len(testSubFiles)):
         for t2t in test2TruthMatches[fi]:
-            print('Scoring file ' + testSubFiles[fi] )
-            print('against file ' + truthSubFiles[t2t])
+            #print('Scoring file ' + testSubFiles[fi] )
+            #print('against file ' + truthSubFiles[t2t])
             scores.append( score( testDir + testSubFiles[fi], truthDir + truthSubFiles[t2t]))
     
     # if no scores raise an exception
@@ -184,10 +184,10 @@ def scoreAll(args):
         raise ScoreException(
             'Internal error: There are no matching submission' )
 
-    print(scores)
-    print ('-------------------------Results are printed here-----------------------------')
+    #print(scores)
+    #print ('-------------------------Results are printed here-----------------------------')
     print(json.dumps(scores))
-    print ('-------------------------End of Results-----------------------------')
+    #print ('-------------------------End of Results-----------------------------')
 
 class ScoreException(Exception):
     pass
